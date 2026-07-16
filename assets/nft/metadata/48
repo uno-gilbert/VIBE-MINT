@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #48 — Wei Emperor",
+  "description": "VibeMint Sepolia test NFT. Hero card: Wei Emperor.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/48.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Wei Emperor"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 48
+    }
+  ]
+}

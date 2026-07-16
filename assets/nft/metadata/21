@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #21 — Goblin Pair",
+  "description": "VibeMint Sepolia test NFT. Hero card: Goblin Pair.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/21.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Goblin Pair"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 21
+    }
+  ]
+}

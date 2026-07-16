@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #31 — Mad Hatter",
+  "description": "VibeMint Sepolia test NFT. Hero card: Mad Hatter.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/31.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Mad Hatter"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 31
+    }
+  ]
+}

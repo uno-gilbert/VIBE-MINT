@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #39 — Sage Of Dawn",
+  "description": "VibeMint Sepolia test NFT. Hero card: Sage Of Dawn.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/39.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Sage Of Dawn"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 39
+    }
+  ]
+}

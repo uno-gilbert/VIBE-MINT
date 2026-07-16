@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #46 — Tiger Bodyguard",
+  "description": "VibeMint Sepolia test NFT. Hero card: Tiger Bodyguard.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/46.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Tiger Bodyguard"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 46
+    }
+  ]
+}

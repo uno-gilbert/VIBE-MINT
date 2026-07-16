@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #0 — Alchemist",
+  "description": "VibeMint Sepolia test NFT. Hero card: Alchemist.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/0.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Alchemist"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 0
+    }
+  ]
+}

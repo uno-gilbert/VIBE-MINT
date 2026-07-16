@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #16 — Court Elder",
+  "description": "VibeMint Sepolia test NFT. Hero card: Court Elder.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/16.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Court Elder"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 16
+    }
+  ]
+}

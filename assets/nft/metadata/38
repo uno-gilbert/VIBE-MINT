@@ -1,0 +1,15 @@
+{
+  "name": "VibeMint Hero #38 — Rebel Vanguard",
+  "description": "VibeMint Sepolia test NFT. Hero card: Rebel Vanguard.",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/38.webp",
+  "attributes": [
+    {
+      "trait_type": "Hero",
+      "value": "Rebel Vanguard"
+    },
+    {
+      "trait_type": "Token ID",
+      "value": 38
+    }
+  ]
+}
