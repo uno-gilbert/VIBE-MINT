@@ -7,6 +7,16 @@
 
 > 테스트넷 교육용입니다. 메인넷 배포 전 반드시 전문 스마트 컨트랙트 Audit을 받으세요.
 
+**GitHub 저장소**: [https://github.com/uno-gilbert/VIBE-MINT](https://github.com/uno-gilbert/VIBE-MINT)
+
+<div align="center">
+
+[![VIBE-MINT GitHub QR 코드](docs/images/vibe-mint-github-qr.png)](https://github.com/uno-gilbert/VIBE-MINT)
+
+*스마트폰으로 QR 스캔 → 저장소 바로 열기*
+
+</div>
+
 ---
 
 ## 누구를 위한 자료인가
