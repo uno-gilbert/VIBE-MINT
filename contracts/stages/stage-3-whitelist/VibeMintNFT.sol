@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.31;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Pausable.sol";
-import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts@5.1.0/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts@5.1.0/access/Ownable.sol";
+import "@openzeppelin/contracts@5.1.0/utils/Pausable.sol";
+import "@openzeppelin/contracts@5.1.0/utils/ReentrancyGuard.sol";
+import "@openzeppelin/contracts@5.1.0/utils/Strings.sol";
 
 /// @title VibeMintNFT — Stage 3: whitelist mint (solution reference)
 /// @notice Sepolia testnet educational use only. Not audited for mainnet.

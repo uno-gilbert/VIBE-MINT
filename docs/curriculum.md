@@ -20,7 +20,7 @@
 | **12:30 ~ 13:30** | **점심 식사** | — |
 | **13:30 ~ 15:00** | **AI 바이브 코딩 NFT 개발 및 배포 과정 학습** | Remix + Cursor 점진적 컨트랙트 빌드, AI 보안 Audit |
 | **15:00 ~ 16:30** | **NFT 컨트랙트 작성 및 멀티체인 배포** | Sepolia 테스트넷 배포·mint, Etherscan 확인, 멀티체인 개념 소개 |
-| **16:30 ~ 18:00** | **AI 바이브 코딩 NFT DApp 개발 및 오픈씨 거래** | MetaMask 민팅 UI, OpenSea 테스트넷 거래 시뮬레이션, 마무리 |
+| **16:30 ~ 18:00** | **AI 바이브 코딩 NFT DApp 개발 및 마무리** | MetaMask 민팅 UI, Etherscan·MetaMask NFT 확인, **(선택) OpenSea Studio** 발행 소개, 마무리 |
 
 ---
 
@@ -34,7 +34,7 @@
 | **12:30 ~ 13:30** | **점심 식사** | 개인 정비 및 휴식 |
 | **13:30 ~ 15:00** | **AI 바이브 코딩 NFT 개발 및 배포 과정 학습** | · **실무 워크플로우**: Remix IDE + Cursor Agent로 Stage 0→3 **점진적 컨트랙트 빌드**<br><br>· AI 공통 규칙: "한 번에 전체 생성 금지", OpenZeppelin 표준 사용<br><br>· **[필수] AI 보안 Audit**: 배포 전 취약점·가스 낭비 코드 교차 검증 및 수정<br><br>· 참고: [03-incremental-build.md](student/03-incremental-build.md), [04-security-audit.md](prompts/04-security-audit.md) |
 | **15:00 ~ 16:30** | **NFT 컨트랙트 작성 및 멀티체인 배포** | · Remix에서 컴파일·최적화 후 **Ethereum Sepolia** 테스트넷 배포 (MetaMask 연동)<br><br>· Faucet으로 테스트 ETH 수령 → 배포 → **테스트 mint** 성공까지<br><br>· Etherscan Sepolia에서 컨트랙트·트랜잭션 확인<br><br>· **멀티체인 개념 소개**: L2(Base, Arbitrum 등)와 Sepolia L1의 역할 비교 — *당일 hands-on은 Sepolia 중심*<br><br>· 참고: [04-deploy-sepolia.md](student/04-deploy-sepolia.md) |
-| **16:30 ~ 18:00** | **AI 바이브 코딩 NFT DApp 개발 및 오픈씨 거래** | · Cursor + AI 웹 빌더로 **MetaMask 연동 민팅 사이트** 구축 (React/JavaScript, wagmi)<br><br>· 배포한 컨트랙트 주소를 프론트에 연결 → 브라우저에서 mint<br><br>· **OpenSea 테스트넷**에서 NFT 조회·거래 시뮬레이션<br><br>· 마무리: 테스트넷 교육용 한계, 메인넷 배포 전 **전문 Audit 필수** 안내<br><br>· 참고: [05-frontend-mint.md](student/05-frontend-mint.md) |
+| **16:30 ~ 18:00** | **AI 바이브 코딩 NFT DApp 개발 및 마무리** | · Cursor + AI 웹 빌더로 **MetaMask 연동 민팅 사이트** 구축 (React/JavaScript, wagmi)<br><br>· 배포한 컨트랙트 주소를 프론트에 연결 → 브라우저에서 mint<br><br>· **Etherscan Sepolia**에서 mint tx·소유 확인 (OpenSea testnet **2025-07-24 종료**)<br><br>· **(선택 · 10분) OpenSea Studio** — [opensea.io/studio](https://opensea.io/studio)에서 메인넷 컬렉션 발행 흐름 소개 (Sepolia 실습 NFT는 Studio에 표시되지 않음)<br><br>· 마무리: 테스트넷 교육용 한계, 메인넷 배포 전 **전문 Audit 필수** 안내<br><br>· 참고: [05-frontend-mint.md](student/05-frontend-mint.md) |
 
 ---
 

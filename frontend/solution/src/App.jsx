@@ -8,8 +8,11 @@ import {
   useWaitForTransactionReceipt,
 } from "wagmi";
 import { formatEther, parseEther } from "viem";
+import { useState } from "react";
 import { vibeMintAbi, CONTRACT_ADDRESS } from "./contract.js";
 import { SEPOLIA_CHAIN_ID } from "./wagmi.js";
+import { TxHashLink } from "./TxHashLink.jsx";
+import { HeroCardPreview } from "./HeroCardPreview.jsx";
 
 function App() {
   const { address, isConnected, chainId } = useAccount();
@@ -67,9 +70,18 @@ function App() {
   const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
     hash,
     query: {
-      onSuccess: () => refetchSupply(),
+      onSuccess: async () => {
+        const result = await refetchSupply();
+        const minted = result.data;
+        if (minted !== undefined && Number(minted) > 0) {
+          setPreviewTokenId(Number(minted) - 1);
+        }
+      },
     },
   });
+
+  const [previewTokenId, setPreviewTokenId] = useState(null);
+  const [lookupId, setLookupId] = useState("");
 
   const priceWei = mintPrice ?? parseEther("0.001");
   const priceLabel = formatEther(priceWei);
@@ -84,9 +96,9 @@ function App() {
     });
   };
 
-  const openseaUrl =
+  const etherscanNftUrl =
     hasAddress && totalMinted !== undefined && Number(totalMinted) > 0
-      ? `https://testnets.opensea.io/assets/sepolia/${CONTRACT_ADDRESS}/${Number(totalMinted) - 1}`
+      ? `https://sepolia.etherscan.io/nft/${CONTRACT_ADDRESS}/${Number(totalMinted) - 1}`
       : null;
 
   return (
@@ -172,10 +184,10 @@ function App() {
                 )}
               </div>
 
-              {openseaUrl && (
+              {etherscanNftUrl && (
                 <p className="status">
-                  <a href={openseaUrl} target="_blank" rel="noreferrer">
-                    OpenSea Sepolia (latest token)
+                  <a href={etherscanNftUrl} target="_blank" rel="noreferrer">
+                    Etherscan NFT (latest token)
                   </a>
                 </p>
               )}
@@ -185,19 +197,42 @@ function App() {
       )}
 
       {error && <p className="error">{error.shortMessage ?? error.message}</p>}
-      {isSuccess && (
-        <p className="success">Mint 성공! Sepolia Etherscan에서 확인하세요.</p>
+      {isSuccess && hash && <TxHashLink hash={hash} />}
+
+      {previewTokenId !== null && (
+        <section className="hero-section">
+          <h2>내 Hero 카드 (DApp 미리보기)</h2>
+          <HeroCardPreview tokenId={previewTokenId} />
+        </section>
       )}
-      {hash && (
-        <p className="status">
-          <a
-            href={`https://sepolia.etherscan.io/tx/${hash}`}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Tx {hash.slice(0, 10)}…
-          </a>
-        </p>
+
+      {hasAddress && totalMinted !== undefined && Number(totalMinted) > 0 && (
+        <section className="hero-lookup">
+          <label htmlFor="token-lookup">다른 tokenId 미리보기</label>
+          <div className="hero-lookup__row">
+            <input
+              id="token-lookup"
+              type="number"
+              min={0}
+              max={Math.max(0, Number(totalMinted) - 1)}
+              placeholder="0"
+              value={lookupId}
+              onChange={(e) => setLookupId(e.target.value)}
+            />
+            <button
+              type="button"
+              className="outline"
+              onClick={() => {
+                const id = Number(lookupId);
+                if (!Number.isNaN(id) && id >= 0 && id < Number(totalMinted)) {
+                  setPreviewTokenId(id);
+                }
+              }}
+            >
+              보기
+            </button>
+          </div>
+        </section>
       )}
 
       <p className="status" style={{ marginTop: "1.5rem", fontSize: "0.75rem" }}>

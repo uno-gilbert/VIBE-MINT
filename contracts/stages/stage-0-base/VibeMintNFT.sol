@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.31;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts@5.1.0/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts@5.1.0/access/Ownable.sol";
+import "@openzeppelin/contracts@5.1.0/utils/Strings.sol";
 
 /// @title VibeMintNFT — Stage 0: ERC-721 base skeleton
 /// @notice Educational contract for vibe-mint workshop. Sepolia testnet only.

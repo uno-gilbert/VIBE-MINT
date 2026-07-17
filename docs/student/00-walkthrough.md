@@ -20,7 +20,7 @@
 | 4 | Stage 0 → 3 컨트랙트 빌드 | 60분 |
 | 5 | AI 보안 Audit | 15분 |
 | 6 | Sepolia 배포 · mint | 40분 |
-| 7 | 프론트 DApp · OpenSea | 40분 |
+| 7 | 프론트 DApp · NFT 확인 | 40분 |
 
 ---
 
@@ -90,28 +90,53 @@
 
 - [ ] Node.js v20+ 확인
 
-### Step 0-5. 교육 저장소 (제공 시)
+### Step 0-5. 교육 저장소 받기
+
+저장소: [https://github.com/uno-gilbert/VIBE-MINT](https://github.com/uno-gilbert/VIBE-MINT)
+
+**방법 A — Git clone (권장)**
 
 ```bash
-git clone <repository-url> vibe-mint
+git clone https://github.com/uno-gilbert/VIBE-MINT.git vibe-mint
 cd vibe-mint
 ```
 
-Cursor에서 `vibe-mint` 폴더를 엽니다.
+**방법 B — ZIP 다운로드 (Git이 없을 때)**
+
+1. [github.com/uno-gilbert/VIBE-MINT](https://github.com/uno-gilbert/VIBE-MINT) 접속  
+2. 초록 **Code** 버튼 → **Download ZIP**  
+3. 압축 해제 (폴더 이름 예: `VIBE-MINT-main`)  
+4. 터미널에서 해당 폴더로 이동:
+
+```bash
+cd ~/Downloads/VIBE-MINT-main
+```
+
+(압축을 푼 실제 경로에 맞게 `cd` 하세요.)
+
+Cursor에서 **File → Open Folder**로 위 프로젝트 폴더를 엽니다.
 
 - [ ] Cursor에서 프로젝트 폴더 열림
 
 ---
-
 ## Part 1 — 도구 세팅 (수업 시작)
 
 ![Part 1 — 도구 세팅](images/walkthrough-part-1.png)
 
 ### Step 1-1. Remix IDE 열기
 
-1. Chrome에서 [remix.ethereum.org](https://remix.ethereum.org) 접속
-2. 왼쪽 **File Explorer** → `contracts` 폴더 → `VibeMintNFT.sol` 새 파일 생성
+1. Chrome에서 [remix.ethereum.org](https://remix.ethereum.org) 접속  
+2. **처음 사용 시** 회원 가입·로그인이 필요할 수 있습니다.  
+   - 화면의 **Sign in / Login / Connect** 안내를 따름  
+   - GitHub·Google·email 등 Remix가 제시하는 방식 중 하나로 계정 생성  
+   - 이미 계정이 있으면 **로그인**만 하면 됩니다  
+3. (선택) 튜토리얼·팝업이 뜨면 Skip / Close로 닫아도 실습에 지장 없습니다  
+4. 왼쪽 **File Explorer** → `contracts` 폴더 → `VibeMintNFT.sol` 새 파일 생성  
 
+> Remix는 브라우저 IDE라 설치는 없지만, **계정으로 워크스페이스가 저장**되는 경우가 많습니다.  
+> 수업 전에 한 번 접속해 가입까지 끝내 두면 Part 4부터 시간이 덜 급합니다.
+
+- [ ] Remix 계정 준비(가입·로그인) 완료  
 - [ ] Remix에서 `VibeMintNFT.sol` 파일 생성
 
 ### Step 1-2. AI 공통 규칙 붙여넣기
@@ -173,39 +198,30 @@ Cursor에서 `vibe-mint` 폴더를 엽니다.
 
 **규칙**: 한 번에 전체 코드를 만들지 않습니다. Stage마다 **추가분만** 요청합니다.
 
-### Step 4-1. Stage 0 — ERC-721 뼈대
+### 따라하기 (권장)
 
-1. `docs/prompts/03-stage-build/stage-0.md` 프롬프트 → Cursor 실행
-2. 생성된 코드를 Remix `VibeMintNFT.sol`에 붙여넣기
-3. Remix **Solidity Compiler** → 버전 **0.8.20** → **Compile**
+아래 **Stage README를 한 단계씩** 열어서 체크리스트를 완료하세요.
 
-막히면: `contracts/stages/stage-0-base/VibeMintNFT.sol` 참고
+→ **[contracts/stages/README.md](../../contracts/stages/README.md)** ← Stage 0부터 순서대로
 
-- [ ] Stage 0 컴파일 성공 (에러 0)
+| Stage | 따라하기 문서 |
+| --- | --- |
+| 0 뼈대 | [stage-0-base/README.md](../../contracts/stages/stage-0-base/README.md) |
+| 1 mint | [stage-1-mint/README.md](../../contracts/stages/stage-1-mint/README.md) |
+| 2 pause·withdraw | [stage-2-access/README.md](../../contracts/stages/stage-2-access/README.md) |
+| 3 whitelist | [stage-3-whitelist/README.md](../../contracts/stages/stage-3-whitelist/README.md) |
 
-### Step 4-2. Stage 1 — Public Mint
+각 Stage 공통: Cursor 프롬프트 → Remix **메뉴 ①→④** (File → Compiler → Deploy → Read/Write) → **0.8.31 · EVM osaka** → **Remix VM Deploy** → README 테스트.  
+Remix 상세·PPT: [03-stage-build/README.md](../prompts/03-stage-build/README.md) · ![Compile·Deploy](../presentation/images/session2-1-3-compile-deploy.png)  
+(`mcopy not found` → Compiler **0.8.31** + EVM **osaka** 확인. import `@5.1.0` 확인)
 
-1. Remix 코드를 Cursor에서 `@VibeMintNFT.sol` 멘션
-2. `docs/prompts/03-stage-build/stage-1.md` 프롬프트 실행
-3. diff만 반영 → Remix **Recompile**
 
-- [ ] Stage 1 컴파일 성공
+시간 부족 시 Stage 3 생략 → `contracts/solution/VibeMintNFT.sol` 가능 (Audit은 필수).
 
-### Step 4-3. Stage 2 — Pause · Owner Mint · Withdraw
-
-1. `docs/prompts/03-stage-build/stage-2.md` 프롬프트 실행
-2. 코드 반영 → Recompile
-
-- [ ] Stage 2 컴파일 성공
-
-### Step 4-4. Stage 3 — Whitelist
-
-1. `docs/prompts/03-stage-build/stage-3.md` 프롬프트 실행
-2. 코드 반영 → Recompile
-
-시간 부족 시: Stage 3 생략 → `contracts/solution/VibeMintNFT.sol` 사용 가능
-
-- [ ] Stage 3 컴파일 성공 (또는 solution 사용)
+- [ ] Stage 0 Compile · 테스트 완료
+- [ ] Stage 1 mint 테스트 완료
+- [ ] Stage 2 pause / withdraw 테스트 완료
+- [ ] Stage 3 whitelist 완료 (또는 solution)
 
 ---
 
@@ -282,7 +298,7 @@ Critical·High가 **1건이라도** 있으면:
 ```
 
 2. 변경된 코드를 Remix에 반영
-3. **Compile** 다시 (0.8.20+)
+3. **Compile** 다시 (0.8.31 · EVM osaka)
 4. (권장) Remix VM에서 mint / pause / withdraw **짧게 재테스트**
 
 - [ ] Critical 0건, High 0건
@@ -400,7 +416,7 @@ allowed: true
 
 ### Step 6-4. 테스트 Mint
 
-1. Deploy 패널 **Value** = `0.001`, 단위 **ether**
+1. Deploy 패널 **Value** = `0.001` ether (Remix 소수 버그 시 wei `1000000000000000` — [04-deploy-sepolia.md](04-deploy-sepolia.md#eth-단위-ether--gwei--wei))
 2. 주황색 `mint` → **transact**
 3. MetaMask **승인** (가스 + 0.001 ETH)
 4. 파란색 확인:
@@ -409,7 +425,8 @@ allowed: true
 
 | 실패 | 원인 |
 | --- | --- |
-| Insufficient payment | Value가 0이거나 wei로 잘못 설정 |
+| Insufficient payment | Value 0 또는 부족 → **0.001 ether** (wei `1000000000000000`) |
+| insufficient funds (want 3 ETH…) | Value **3** 잘못 입력 → **0.001** ether |
 | Public mint disabled | `setPublicMintEnabled(true)` 필요 |
 | ETH 부족 | Faucet 재충전 |
 
@@ -440,23 +457,23 @@ https://sepolia.etherscan.io/address/여기에_컨트랙트_주소
 | 포인트 | 내용 |
 | --- | --- |
 | Injected Provider | MetaMask → **실넷(테스트넷)** 연결 |
-| 주소 저장 | 프론트·OpenSea·Etherscan의 열쇠 |
+| 주소 저장 | 프론트·Etherscan의 열쇠 |
 | Sepolia ≠ 메인넷 | 테스트 ETH만, 실제 자산 아님 |
 
 **다음**: 배포 주소로 → Part 7 민팅 사이트
 
 ---
 
-## Part 7 — 프론트 DApp · OpenSea
+## Part 7 — 프론트 DApp · NFT 확인
 
 ![Part 7 — 프론트 DApp · OpenSea](images/walkthrough-part-7.png)
 
 ### 이 Part에서 하는 일 (한 줄)
 
-Remix 버튼 대신, **웹페이지(민팅 사이트)**에서 MetaMask로 mint하고, OpenSea에서 NFT를 봅니다.
+Remix 버튼 대신, **웹페이지(민팅 사이트)**에서 MetaMask로 mint하고, **Etherscan·MetaMask**에서 NFT를 확인합니다.
 
 ```text
-브라우저 DApp  →  MetaMask 승인  →  Sepolia 컨트랙트 mint  →  OpenSea에 표시
+브라우저 DApp  →  MetaMask 승인  →  Sepolia 컨트랙트 mint  →  Etherscan / MetaMask에서 확인
 ```
 
 ---
@@ -540,29 +557,53 @@ npm run dev
 시간이 되면:
 
 1. [docs/prompts/05-frontend-connect.md](../prompts/05-frontend-connect.md)로 Cursor에 UI 개선 요청  
-   (발행량 표시, OpenSea 링크 등)
+   (발행량 표시, Etherscan 링크 등)
 2. 또는 `frontend/solution/` 과 비교
 
 필수는 아닙니다. **Connect → Mint 성공**이면 Part 7 핵심은 달성입니다.
 
 ---
 
-### Step 7-5. OpenSea 테스트넷
+### Step 7-5. mint한 NFT 확인 (Etherscan)
 
-1. [https://testnets.opensea.io/](https://testnets.opensea.io/) 접속  
-2. MetaMask로 지갑 연결 (Sepolia)  
-3. Profile / Collected에서 NFT 확인  
+> **OpenSea 테스트넷 종료 (2025-07-24)** — `testnets.opensea.io`는 더 이상 Sepolia NFT를 표시하지 않습니다.  
+> [05-frontend-mint.md §8](05-frontend-mint.md#8-mint한-nft-확인하기) 참고.
 
-또는 직링크 (tokenId가 `0`인 경우):
+1. mint tx 해시로 Etherscan 확인:
 
 ```text
-https://testnets.opensea.io/assets/sepolia/컨트랙트주소/0
+https://sepolia.etherscan.io/tx/{TX_HASH}
 ```
 
-> OpenSea는 **인덱싱(목록에 올리기)**에 **5~30분** 걸릴 수 있습니다.  
-> 안 보여도 Etherscan에 mint tx·`ownerOf(0)`이 맞으면 **민팅은 성공**한 것입니다.
+2. 컨트랙트 · NFT 페이지 (첫 mint → tokenId `0`):
 
-- [ ] OpenSea에서 확인 **또는** Etherscan으로 대체 확인
+```text
+https://sepolia.etherscan.io/nft/{CONTRACT_ADDRESS}/0
+```
+
+3. (선택) MetaMask **NFTs** 탭 → Sepolia → Import NFT
+
+> Etherscan mint tx Success + `ownerOf(0)` = 내 주소면 **민팅 성공**입니다.
+
+- [ ] Etherscan에서 mint tx · 소유 확인
+
+---
+
+### Step 7-6. (선택) OpenSea Studio — 메인넷 발행 다음 단계
+
+> Sepolia VibeMint는 [OpenSea Studio](https://opensea.io/studio)에 **표시되지 않습니다**.  
+> 수업 **마지막** 또는 **수업 후** 참고용입니다.
+
+| 오늘 (Sepolia) | Studio (메인넷) |
+| --- | --- |
+| 컨트랙트 + DApp 직접 개발 | 크리에이터 UI로 컬렉션·드롭 발행 |
+| Etherscan으로 확인 | [opensea.io](https://opensea.io) 컬렉션 페이지 |
+
+1. [opensea.io/studio](https://opensea.io/studio) 접속 → 지갑 연결  
+2. Create → 체인·이미지·metadata·가격 설정  
+3. 메인넷 배포 전 **전문 Audit** 필수  
+
+상세: [05-frontend-mint.md §9](05-frontend-mint.md#9-수업-후--opensea-studio로-nft-발행-선택)
 
 ---
 
@@ -572,7 +613,8 @@ https://testnets.opensea.io/assets/sepolia/컨트랙트주소/0
 | --- | --- |
 | DApp | 지갑 + 컨트랙트를 잇는 **웹 UI** |
 | `.env` 주소 | 「어느 컨트랙트에 mint할지」 지정 |
-| OpenSea | 마켓이 온체인 NFT를 **읽어 보여주는** 곳 (테스트넷) |
+| Etherscan | Sepolia mint·소유 **확인** (OpenSea testnet 종료 후 기본 도구) |
+| OpenSea Studio | **메인넷** 발행·드롭 도구 — Sepolia 실습 NFT와 **무관** ([Studio](https://opensea.io/studio)) |
 | Ship 완료 | Intent→…→Review→**Ship** 워크플로우 완주 |
 
 ---
@@ -593,13 +635,13 @@ https://testnets.opensea.io/assets/sepolia/컨트랙트주소/0
 
 | 증상 | 해결 |
 | --- | --- |
-| Remix 컴파일 오류 | OpenZeppelin import, Compiler 0.8.20 확인 |
+| Remix 컴파일 오류 | Compiler **0.8.31** + EVM **osaka**. import는 `@openzeppelin/contracts@5.1.0/...` |
 | MetaMask Wrong network | Sepolia(11155111) 선택 |
 | Faucet 안 됨 | PoW Faucet 또는 강사에게 요청 |
 | AI가 전체 코드 재작성 | 00-rules + "해당 항목만 / Stage N diff만" |
 | mint 실패 | ETH 부족, publicMintEnabled, Value 0.001 **ether** |
 | 프론트 mint 실패 | `.env` 주소, `npm run dev` 재시작, Sepolia |
-| OpenSea에 안 보임 | 5~30분 대기, Etherscan으로 먼저 확인 |
+| OpenSea testnet | **2025-07-24 종료** — Etherscan으로 확인 |
 
 상세 FAQ: [docs/instructor/troubleshooting.md](../instructor/troubleshooting.md)
 
@@ -615,6 +657,7 @@ https://testnets.opensea.io/assets/sepolia/컨트랙트주소/0
 | Remix·Stage 확인 | [../prompts/03-stage-build/README.md](../prompts/03-stage-build/README.md) |
 | 배포 상세 | [04-deploy-sepolia.md](04-deploy-sepolia.md) |
 | 프론트 상세 | [05-frontend-mint.md](05-frontend-mint.md) |
+| OpenSea Studio (메인넷 발행) | [05-frontend-mint.md §9](05-frontend-mint.md#9-수업-후--opensea-studio로-nft-발행-선택) · [opensea.io/studio](https://opensea.io/studio) |
 | 보안 Audit 프롬프트 | [../prompts/04-security-audit.md](../prompts/04-security-audit.md) |
 
 ---
@@ -630,6 +673,6 @@ https://testnets.opensea.io/assets/sepolia/컨트랙트주소/0
 | 4 Stage 빌드 | [walkthrough-part-4.png](images/walkthrough-part-4.png) |
 | 5 AI Audit | [walkthrough-part-5.png](images/walkthrough-part-5.png) |
 | 6 Sepolia 배포 | [walkthrough-part-6.png](images/walkthrough-part-6.png) |
-| 7 DApp · OpenSea | [walkthrough-part-7.png](images/walkthrough-part-7.png) |
+| 7 DApp · NFT 확인 | [walkthrough-part-7.png](images/walkthrough-part-7.png) |
 
 **축하합니다!** Intent → Spec → Generate → **Review** → Ship 워크플로우를 직접 완주하셨습니다.

@@ -1,6 +1,6 @@
 # VibeMint Frontend — Solution
 
-워크숍 **완성 예제** DApp. supply 표시, whitelist mint, Sepolia 전환, OpenSea/Etherscan 링크 포함.
+워크숍 **완성 예제** DApp. supply 표시, whitelist mint, Sepolia 전환, Etherscan NFT 링크 포함.
 
 ## 실행
 
@@ -20,4 +20,4 @@ npm run dev
 | public mint toggle 표시 | - | O |
 | whitelist mint | - | O |
 | Switch Sepolia | - | O |
-| OpenSea / Etherscan 링크 | - | O |
+| OpenSea / Etherscan 링크 | - | Etherscan NFT |

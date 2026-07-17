@@ -19,7 +19,7 @@
 | **실습 환경** | [Cursor](https://cursor.com/) AI 코드 에디터 (2025년 VS Code → **2026년 Cursor**로 전환) |
 | **사용 언어** | **JavaScript**, **Solidity** |
 | **기본 브라우저** | Google Chrome (MetaMask·Remix 연동 표준) |
-| **스마트 컨트랙트 IDE** | [Remix IDE](https://remix.ethereum.org/) (웹 브라우저, 별도 설치 불필요) |
+| **스마트 컨트랙트 IDE** | [Remix IDE](https://remix.ethereum.org/) (웹 브라우저, 별도 설치 불필요 · **첫 사용 시 회원 가입·로그인**) |
 | **프론트엔드 실습** | Node.js LTS **v20 이상** |
 | **블록체인 네트워크** | Ethereum **Sepolia 테스트넷** (실제 ETH 사용 없음) |
 
@@ -43,12 +43,18 @@
 1. [cursor.com](https://cursor.com/)에서 Cursor를 다운로드해 노트북에 설치합니다.
 2. 회원가입 후 **로그인 상태**로 수업에 참석해 주세요. (무료 계정으로 실습 가능)
 
-### 3. Node.js (프론트 DApp 실습)
+### 3. Remix IDE (웹 · 첫 사용 시 가입)
+
+1. Chrome에서 [remix.ethereum.org](https://remix.ethereum.org/) 접속
+2. **처음이면** Sign in / Login으로 회원 가입 (GitHub·Google·email 등)
+3. 로그인된 상태로 수업 당일 접속할 수 있게 준비
+
+### 4. Node.js (프론트 DApp 실습)
 
 1. [nodejs.org](https://nodejs.org/)에서 **LTS v20+** 설치
 2. 터미널에서 확인: `node -v` (예: v20.x, v22.x)
 
-### 4. 테스트 가스비 (Faucet)
+### 5. 테스트 가스비 (Faucet)
 
 블록체인 배포 실습에 필요한 **무료 Sepolia ETH**는 당일 현장에서 안내해 드립니다. 사전에 받아 두고 싶다면 아래 Faucet을 이용할 수 있습니다.
 
@@ -69,13 +75,13 @@
 
 ## (선택) 교육 자료 미리보기
 
-교육 저장소가 제공되면 아래 경로를 참고하세요.
+저장소: [https://github.com/uno-gilbert/VIBE-MINT](https://github.com/uno-gilbert/VIBE-MINT)  
+(`git clone` 또는 Code → Download ZIP — 자세한 절차는 [00-walkthrough.md](student/00-walkthrough.md) Step 0-5)
 
 - `docs/student/` — 단계별 실습 가이드
 - `docs/prompts/` — Cursor AI 프롬프트 팩
 
 ---
-
 ## 2025년 → 2026년 변경 요약
 
 | 2025년 (참고) | 2026년 (본 교육) |

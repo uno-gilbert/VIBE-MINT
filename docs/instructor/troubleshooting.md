@@ -23,17 +23,28 @@
 
 ## Remix IDE
 
-### OpenZeppelin import 컴파일 오류
+### OpenZeppelin import 컴파일 오류 / `ParserError: requires different compiler version`
 
-Remix Compiler 0.8.20+, `viaIR` 비활성 기본값 사용.
+**원인**: `pragma ^0.8.31` 또는 OZ와 Compiler 버전이 안 맞음.
 
-import 경로 예:
+**해결**: Compiler **0.8.31**
 
-```solidity
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-```
+### `DeclarationError: Function "mcopy" not found`
 
-Remix에서 **GitHub** import 사용 시 `@openzeppelin/contracts` 버전이 맞는지 확인.
+**원인 (자주 겹침)**  
+1. Compiler가 **0.8.31 미만**인데 EVM을 **osaka**로 고름 (`osaka`는 solc **0.8.29+**)  
+2. EVM이 `shanghai` 등 → `mcopy` 없음  
+3. import가 `@openzeppelin/contracts/...`(버전 없음) → Remix가 **최신 OZ**를 받음  
+
+**해결**  
+1. import를 `@openzeppelin/contracts@5.1.0/...`로 맞추고 저장  
+2. Compiler **0.8.31** + EVM **osaka**  
+3. 다시 Compile  
+
+Deploy 탭 Environment: **Remix VM**
+
+수업 기본 조합: **Compiler 0.8.31 + EVM osaka**
+
 
 ### "Stack too deep"
 
@@ -80,10 +91,13 @@ Remix에서 **GitHub** import 사용 시 `@openzeppelin/contracts` 버전이 맞
 - MetaMask Sepolia + 충분한 ETH (0.001+ gas)
 - `publicMintEnabled`가 true인지 (Remix Read Contract)
 
-### OpenSea에 NFT 안 보임
+### NFT가 안 보일 때 (MetaMask · Etherscan)
 
-- Sepolia testnet OpenSea: [testnets.opensea.io](https://testnets.opensea.io/)
-- 인덱싱 5~30분 지연 가능 — Etherscan에서 tokenId 확인 후 안내
+- OpenSea **테스트넷**(`testnets.opensea.io`)은 **2025-07-24부터 지원 종료**
+- Sepolia NFT 확인: [Etherscan Sepolia](https://sepolia.etherscan.io/) — `ownerOf`, `/nft/{address}/{tokenId}`
+- MetaMask **NFTs** 탭 → Sepolia → Import NFT (선택)
+- Sepolia NFT가 [OpenSea Studio](https://opensea.io/studio)에 없음 → **정상** (Studio는 메인넷 발행 도구)
+- `setBaseURI` placeholder면 이미지 없을 수 있음 — **소유권(tx·ownerOf) 우선**
 
 ---
 

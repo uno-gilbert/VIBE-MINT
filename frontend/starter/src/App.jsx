@@ -1,18 +1,48 @@
-import { useAccount, useConnect, useDisconnect, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
+import {
+  useAccount,
+  useConnect,
+  useDisconnect,
+  useReadContract,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
 import { parseEther } from "viem";
+import { useState } from "react";
 import { vibeMintAbi, CONTRACT_ADDRESS } from "./contract.js";
+import { TxHashLink } from "./TxHashLink.jsx";
+import { HeroCardPreview } from "./HeroCardPreview.jsx";
 
 function App() {
   const { address, isConnected, chainId } = useAccount();
   const { connect, connectors, isPending: isConnecting } = useConnect();
   const { disconnect } = useDisconnect();
 
+  const hasAddress = CONTRACT_ADDRESS && CONTRACT_ADDRESS !== "undefined";
+
+  const { data: totalMinted, refetch: refetchSupply } = useReadContract({
+    address: hasAddress ? CONTRACT_ADDRESS : undefined,
+    abi: vibeMintAbi,
+    functionName: "totalMinted",
+  });
+
   const { writeContract, data: hash, isPending, error } = useWriteContract();
-  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({ hash });
+  const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+    hash,
+    query: {
+      onSuccess: async () => {
+        const result = await refetchSupply();
+        const minted = result.data;
+        if (minted !== undefined && Number(minted) > 0) {
+          setPreviewTokenId(Number(minted) - 1);
+        }
+      },
+    },
+  });
+
+  const [previewTokenId, setPreviewTokenId] = useState(null);
 
   const sepoliaId = 11155111;
   const isSepolia = chainId === sepoliaId;
-  const hasAddress = CONTRACT_ADDRESS && CONTRACT_ADDRESS !== "undefined";
 
   const handleMint = () => {
     if (!hasAddress) return;
@@ -63,8 +93,14 @@ function App() {
       )}
 
       {error && <p className="error">{error.shortMessage ?? error.message}</p>}
-      {isSuccess && <p className="success">Mint 성공! Etherscan에서 tx 확인하세요.</p>}
-      {hash && <p className="status">Tx: {hash.slice(0, 10)}…</p>}
+      {isSuccess && hash && <TxHashLink hash={hash} />}
+
+      {previewTokenId !== null && (
+        <section className="hero-section">
+          <h2>내 Hero 카드 (DApp 미리보기)</h2>
+          <HeroCardPreview tokenId={previewTokenId} />
+        </section>
+      )}
     </div>
   );
 }

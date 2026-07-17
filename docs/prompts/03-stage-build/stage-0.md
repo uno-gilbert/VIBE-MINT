@@ -8,34 +8,57 @@ Remix 공통 가이드 · Stage별 체크리스트: **[README.md](README.md)**
 
 ## Intent
 
-OpenZeppelin ERC721 + Ownable 기반 **VibeMint** 최소 컨트랙트. mint는 아직 없음.
+**VibeMint** NFT의 뼈대만 만든다. 이름은 붙이고, 총 100개 한도와 관리자(owner)만 두고, **아직 mint(발행)는 하지 않는다.**
 
 ---
 
 ## 복붙용 프롬프트
 
+아래를 Cursor에 그대로 붙여넣으세요. (`00-rules`를 먼저 붙인 뒤 이어서)
+
 ```
-Stage 0만 구현하세요. 파일명: VibeMintNFT.sol
+지금 Stage 0만 만들어 주세요. 파일 이름: VibeMintNFT.sol
 
-[Spec]
-- ERC721("VibeMint", "VMINT")
-- Ownable: deployer가 owner
-- maxSupply = 100 (constant 또는 immutable)
-- totalMinted counter (private)
-- _baseTokenURI storage + setBaseURI(string) onlyOwner
-- tokenURI override: baseURI + tokenId
-- mint 함수 없음 (Stage 1에서 추가)
+하고 싶은 것 (쉬운 말):
+- NFT 컬렉션 이름은 VibeMint, 심볼은 VMINT
+- 이더리움 NFT 표준(ERC-721)과 관리자(owner) 기능을 OpenZeppelin으로 붙이기
+- 전체 발행 한도는 100개로 고정
+- 지금까지 몇 개 나왔는지 세는 숫자(아직 0)
+- 관리자만 메타데이터 기본 주소(base URI)를 바꿀 수 있게
+- 토큰마다 주소 = 기본 주소 + 번호 로 조회되게
+- 아직 “발행(mint)” 함수는 만들지 마세요 (다음 Stage에서 함)
 
-OpenZeppelin import, SPDX, pragma ^0.8.20.
-Remix 컴파일 가능한 단일 파일.
+버전·환경:
+- Solidity ^0.8.31
+- Remix에서 돌아가게, OpenZeppelin은 @5.1.0 경로로 import
+- 파일 하나로 Remix 컴파일 가능하게
+
+응답 방식:
+- 완성된 VibeMintNFT.sol 코드를 주세요
+- 무엇을 만들었는지 한글로 짧게 설명해 주세요
 ```
 
 ---
 
 ## Remix 테스트 (구체적으로)
 
+![Remix Compile·Deploy 메뉴 순서](../../presentation/images/session2-1-3-compile-deploy.png)
+
+> **메뉴 순서**: ① File Explorer → ② Solidity Compiler → ③ Deploy & Run → ④ Read/Write  
+> 전체 가이드: [03-stage-build/README.md](README.md) · 실습 파일: `contracts/stages/stage-0-base/VibeMintNFT.sol`
+
 > Stage 0은 **실제 Sepolia 배포 전**에 Remix **가상 환경(Remix VM)** 으로 충분합니다.  
-> Environment: `Remix VM (Cancun)` 또는 `Remix VM (Shanghai)` 권장.
+> Compiler **0.8.31** + Advanced → **EVM Version = osaka**. Environment: `Remix VM` 권장.
+
+### Remix 메뉴별 순서 (요약)
+
+| # | 메뉴 | 할 일 |
+| --- | --- | --- |
+| ① | **File Explorer** | `contracts/VibeMintNFT.sol`에 stage-0 코드 붙여넣기 · 저장 |
+| ② | **Solidity Compiler** | 0.8.31 · EVM osaka · **Compile VibeMintNFT.sol** |
+| ③ | **Deploy & Run** | Environment **Remix VM** · Account #0 · **Deploy** |
+| ④ | **Deployed Contracts** | 파란 Read / 주황 Write · `setBaseURI` owner 테스트 |
+
 
 ### Environment란? (Remix VM vs Injected Provider)
 
@@ -56,7 +79,9 @@ Remix 컴파일 가능한 단일 파일.
 #### Remix VM이란?
 
 - Remix가 브라우저 메모리에 만드는 **연습용 가상 체인**
-- 이름 예: `Remix VM (Cancun)`, `Remix VM (Shanghai)` — EVM 버전 차이일 뿐, Stage 0은 아무거나 OK
+- 이름 예: `Remix VM`, `Remix VM (Cancun)` 등 — Stage 0은 Remix VM이면 OK  
+- Compiler **EVM Version**은 **osaka**로 맞춤 (기본값)
+
 - Account #0, #1, #2… 가 **자동으로** 생기고, 각각 가짜 ETH를 많이 보유
 - 배포·트랜잭션이 **즉시** 처리됨 (Faucet·가스비·네트워크 대기 없음)
 - 브라우저를 새로고침하면 VM 상태가 **초기화**될 수 있음 (연습용이라 괜찮음)
@@ -94,9 +119,10 @@ Remix 컴파일 가능한 단일 파일.
 
 1. 왼쪽 **Deploy & Run Transactions** (이더리움 아이콘) 클릭  
 2. 맨 위 **Environment** 드롭다운 클릭  
-3. **`Remix VM (Cancun)`** 또는 **`Remix VM (Shanghai)`** 선택  
+3. Compiler EVM Version이 **osaka**인지 확인 후, Environment에서 **`Remix VM`** 선택  
 4. 그 아래 **Account**에 `0x...` 주소와 잔액(100 ETH 등)이 보이면 OK  
-5. **절대** 지금은 `Injected Provider - MetaMask`를 고르지 않기  
+5. **절대** 지금은 `Injected Provider - MetaMask`를 고르지 않기
+  
 
 | 지금 화면 | 의미 |
 | --- | --- |
@@ -107,13 +133,15 @@ Remix 컴파일 가능한 단일 파일.
 
 ### 1) 컴파일
 
-1. [remix.ethereum.org](https://remix.ethereum.org) → `VibeMintNFT.sol` 열기
-2. **Solidity Compiler** → 버전 **0.8.20+**
-3. **Compile VibeMintNFT.sol** → 초록 체크(에러 0)
+1. [remix.ethereum.org](https://remix.ethereum.org) → `VibeMintNFT.sol` 열기  
+   (실습 기준: `contracts/stages/stage-0-base/VibeMintNFT.sol`)
+2. **Solidity Compiler** → **0.8.31**
+3. **Advanced Configurations** → **EVM Version** = **osaka**
+4. **Compile VibeMintNFT.sol** → 초록 체크(에러 0)
 
 | 확인 | 기대 |
 | --- | --- |
-| OpenZeppelin import | Remix가 자동 다운로드 |
+| import `@openzeppelin/contracts@5.1.0/...` | Remix가 **5.1.0** 다운로드 |
 | Compilation | Successful |
 
 ---

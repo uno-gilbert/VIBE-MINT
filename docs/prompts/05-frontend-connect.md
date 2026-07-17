@@ -20,7 +20,7 @@ Sepolia 테스트넷 VibeMint NFT 민팅 DApp을 완성해 주세요.
 - mintPrice 표시 (0.001 ETH)
 - totalSupply / maxSupply 읽기 (가능하면)
 - 트랜잭션 pending / success / error 상태
-- OpenSea Sepolia 링크 (collection URL 템플릿)
+- Etherscan Sepolia 링크 (tx · NFT 페이지 URL 템플릿)
 
 [금지]
 - 전체 프로젝트 재 scaffold
@@ -42,16 +42,24 @@ VITE_CONTRACT_ADDRESS=0xYourSepoliaDeployAddress
 
 ---
 
-## OpenSea Sepolia URL 템플릿
+## Etherscan Sepolia URL 템플릿
+
+mint 트랜잭션:
 
 ```
-https://testnets.opensea.io/assets/sepolia/{CONTRACT_ADDRESS}/{TOKEN_ID}
+https://sepolia.etherscan.io/tx/{TX_HASH}
 ```
 
-Collection:
+NFT (tokenId):
 
 ```
-https://testnets.opensea.io/collection/vibemint-{CONTRACT_ADDRESS.slice(0,8)}
+https://sepolia.etherscan.io/nft/{CONTRACT_ADDRESS}/{TOKEN_ID}
 ```
 
-(실제 slug는 OpenSea 인덱싱 후 확인 — 인덱싱 지연 5~30분 가능)
+컨트랙트:
+
+```
+https://sepolia.etherscan.io/address/{CONTRACT_ADDRESS}
+```
+
+> OpenSea **테스트넷**(`testnets.opensea.io`)은 2025-07-24부터 지원 종료. Sepolia 확인은 Etherscan 사용.

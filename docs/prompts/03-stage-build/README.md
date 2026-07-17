@@ -4,12 +4,13 @@
 
 | 문서 | 내용 |
 | --- | --- |
-| [stage-0.md](stage-0.md) | ERC-721 뼈대 |
-| [stage-1.md](stage-1.md) | public mint |
-| [stage-2.md](stage-2.md) | pause · ownerMint · withdraw |
-| [stage-3.md](stage-3.md) | whitelist |
-| [00-rules.md](../00-rules.md) | AI 공통 규칙 (매번 먼저) |
+| [stage-0.md](stage-0.md) | NFT 뼈대 (이름·한도·관리자, mint 없음) |
+| [stage-1.md](stage-1.md) | 누구나 돈 내고 발행 (0.001 ETH · 지갑당 3개) |
+| [stage-2.md](stage-2.md) | 일시정지 · 관리자 발행 · 수익 인출 |
+| [stage-3.md](stage-3.md) | 화이트리스트만 미리 받기 |
+| [00-rules.md](../00-rules.md) | AI 공통 규칙 (매번 먼저 붙여넣기) |
 
+> **복붙 프롬프트**는 영어 Spec이 아니라 **한글 쉬운 말**로 적혀 있습니다. Cursor가 코드를 짜고, 설명·Remix 시험 방법도 한글로 답하도록 되어 있습니다.  
 > Stage 0~3 테스트는 **Remix VM**으로 합니다.  
 > Sepolia(Injected Provider) 배포는 [04-deploy-sepolia.md](../../student/04-deploy-sepolia.md)에서.
 
@@ -20,96 +21,136 @@
 [Remix IDE](https://remix.ethereum.org) = 브라우저에서 Solidity를 **쓰고 · 컴파일하고 · 배포하고 · 테스트**하는 웹 도구입니다.  
 설치 없이 Chrome만 있으면 됩니다.
 
-### 왼쪽 아이콘 (자주 쓰는 3개)
+![Remix Compile·Deploy 메뉴 순서](../../presentation/images/session2-1-3-compile-deploy.png)
 
-| 아이콘 | 이름 | 하는 일 |
-| --- | --- | --- |
-| 📁 | **File Explorer** | `.sol` 파일 만들고 코드 붙여넣기 |
-| ⚙️ (S 모양) | **Solidity Compiler** | 코드 → 바이트코드로 **컴파일** |
-| 🚀 (이더리움) | **Deploy & Run** | **배포** + 함수 호출(읽기/쓰기) |
+> 실습 파일: [`contracts/stages/stage-0-base/VibeMintNFT.sol`](../../../contracts/stages/stage-0-base/VibeMintNFT.sol)  
+> PPT 소제목: **2-1-3 Compile·Deploy·Read/Write**
 
 ---
 
-## 2. Remix 사용법 (처음부터)
+## 2. Remix 메뉴별 순서 (VibeMintNFT.sol 기준)
 
-### Step A — 파일 만들기
+아래 **①→④** 순서대로 진행합니다. Stage 1~3도 동일한 메뉴 흐름입니다.
 
-1. [remix.ethereum.org](https://remix.ethereum.org) 접속  
-2. 왼쪽 **File Explorer**  
-3. `contracts` 폴더(없으면 생성) → 새 파일 **`VibeMintNFT.sol`**  
-4. Cursor가 만든 코드 **전체 붙여넣기** → 저장 (`Ctrl/Cmd + S`)
+### ① File Explorer (📁) — 코드 넣기
 
-### Step B — 컴파일
-
-1. **Solidity Compiler** 클릭  
-2. Compiler: **0.8.20** 이상  
-3. **Compile VibeMintNFT.sol**  
-4. 초록 체크 = 성공 / 빨간 에러면 메시지 읽고 수정  
-
-OpenZeppelin(`@openzeppelin/...`)은 Remix가 **자동 다운로드**합니다. 첫 컴파일은 조금 걸릴 수 있습니다.
-
-### Step C — Environment 고르기 (중요)
-
-**Deploy & Run** → 맨 위 **Environment**:
-
-| 선택 | 의미 | Stage 0~3 |
+| 순서 | 할 일 | VibeMintNFT.sol에서 확인 |
 | --- | --- | --- |
-| **Remix VM (Cancun/Shanghai)** | 브라우저 안 **연습용** 체인 | ✅ **여기 사용** |
-| **Injected Provider - MetaMask** | Sepolia 등 **실제 테스트넷** | ❌ 나중에 배포할 때 |
+| 1 | [remix.ethereum.org](https://remix.ethereum.org) 접속 (필요 시 로그인) | — |
+| 2 | 왼쪽 **File Explorer** 클릭 | 첫 번째 아이콘 |
+| 3 | `contracts` 폴더 → 새 파일 **`VibeMintNFT.sol`** | 파일명 고정 |
+| 4 | Cursor 코드 또는 [stage-0-base/VibeMintNFT.sol](../../../contracts/stages/stage-0-base/VibeMintNFT.sol) **전체 붙여넣기** | `pragma ^0.8.31` |
+| 5 | **저장** (`Cmd/Ctrl + S`) | import 3줄 `@5.1.0` |
 
-Remix VM = MetaMask·Faucet 없이 Account #0, #1… 과 가짜 ETH로 바로 테스트.
+```solidity
+pragma solidity ^0.8.31;
+import "@openzeppelin/contracts@5.1.0/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts@5.1.0/access/Ownable.sol";
+import "@openzeppelin/contracts@5.1.0/utils/Strings.sol";
+```
 
-### Step D — 배포
+---
 
-1. Environment = **Remix VM**  
-2. Account = 기본 Account #0 (나중에 owner)  
-3. Contract = **`VibeMintNFT`**  
-4. **Deploy** 클릭  
-5. 아래 **Deployed Contracts**에 컨트랙트가 생기면 성공  
+### ② Solidity Compiler (⚙️) — 컴파일
 
-> 코드를 고친 뒤에는 **다시 Compile → 다시 Deploy** 하세요.  
-> 옛 배포본은 예전 코드입니다. (옆 휴지통으로 지워도 됨)
+| 순서 | 메뉴 / 항목 | 설정값 |
+| --- | --- | --- |
+| 1 | 왼쪽 **Solidity Compiler** 클릭 | S 모양 아이콘 |
+| 2 | **COMPILER** 드롭다운 | **`0.8.31`** |
+| 3 | **Advanced Configurations** 펼치기 | — |
+| 4 | **EVM Version** | **`osaka`** |
+| 5 | **Compile VibeMintNFT.sol** (파란 버튼) | — |
+| 6 | 아이콘에 **초록 체크** | 에러 0 |
 
-### Step E — 함수 호출 (파란색 / 주황색)
+| 확인 | 기대 |
+| --- | --- |
+| CONTRACT 드롭다운 | `VibeMintNFT (VibeMintNFT.sol)` |
+| OpenZeppelin | `@openzeppelin/contracts@5.1.0/...` 자동 다운로드 |
+| Compilation | Successful |
 
-Deployed Contracts에서 컨트랙트를 **펼칩니다**.
+> `mcopy not found` → Compiler **0.8.31** + EVM **osaka** + import `@5.1.0` 재확인
 
-| 색 | 종류 | 클릭 | 하는 일 |
+#### EVM이란? (한 줄)
+
+**EVM** = 블록체인에서 컨트랙트를 실행하는 가상 컴퓨터.  
+Compile = `.sol` → EVM 바이트코드. **EVM Version = osaka**는 수업 기준(Compiler **0.8.31**과 짝).
+
+자세한 설명: [stage-0-base/README.md](../../../contracts/stages/stage-0-base/README.md)
+
+---
+
+### ③ Deploy & Run Transactions (🚀) — 배포
+
+| 순서 | 메뉴 / 항목 | 설정값 |
+| --- | --- | --- |
+| 1 | 왼쪽 **Deploy & Run Transactions** 클릭 | 이더리움 아이콘 |
+| 2 | **Environment** | **`Remix VM`** (Injected Provider 아님) |
+| 3 | **Account** | **Account #0** (배포자 = owner) |
+| 4 | **CONTRACT** | **`VibeMintNFT - VibeMintNFT.sol`** |
+| 5 | **Deploy** (주황 버튼) | 생성자 인자 없음 |
+| 6 | 아래 **Deployed Contracts** | `VIBEMINTNFT AT 0x...` 등장 |
+
+> 코드 수정 후에는 **② Compile → ③ Deploy** 를 다시 합니다.
+
+| Environment | Stage 0~3 | Sepolia 배포 |
+| --- | --- | --- |
+| **Remix VM** | ✅ 연습용 가짜 체인 | — |
+| **Injected Provider - MetaMask** | ❌ 지금 쓰지 않음 | ✅ [04-deploy-sepolia.md](../../student/04-deploy-sepolia.md) |
+
+---
+
+### ④ Deployed Contracts — Read / Write
+
+컨트랙트 이름을 **펼치면** 함수 버튼이 보입니다.  
+색은 Remix가 **「이 함수가 무엇을 할 수 있는지」** 를 알려 주는 표시입니다.
+
+| 색 | 종류 | 하는 일 | 클릭 방법 | VibeMint 예 |
+| --- | --- | --- | --- | --- |
+| **파란색** | **읽기** (`view` / `pure`) | 값만 **조회** · 상태 안 바꿈 · ETH 안 냄 | 버튼만 클릭 | `name`, `owner`, `maxSupply`, `totalMinted` |
+| **주황색** | **쓰기** (일반) | 상태를 **바꿈** · ETH는 안 받음 | 값 입력 → **transact** | `setBaseURI`, `pause`, `setWhitelist` |
+| **빨간색** | **쓰기 + ETH** (`payable`) | 상태를 바꾸면서 **이더를 받을 수 있음** | **Value**에 ETH → 버튼 → **transact** | `mint`, `whitelistMint` |
+
+```text
+파란 = 「지금 값이 뭐야?」 물어보기
+주황 = 「저장해 줘」 (돈은 안 냄)
+빨강 = 「돈 내고 해 줘」 (mint처럼 Value 필요)
+```
+
+> Stage 0에는 빨간 버튼이 **없습니다** (`mint`가 없어서).  
+> Stage 1부터 `mint`가 **빨강**으로 보입니다.
+
+#### Stage 0 꼭 확인
+
+| # | 동작 | 기대 |
+| --- | --- | --- |
+| 1 | `name` / `symbol` Read | VibeMint / VMINT |
+| 2 | `totalMinted` Read | 0 |
+| 3 | Account **#0** → `setBaseURI` Write | 성공 |
+| 4 | Account **#1** → `setBaseURI` Write | **revert** (onlyOwner) |
+| 5 | 함수 목록 | **`mint` 없음** |
+
+#### VALUE(ether) — Stage 1부터
+
+`mint` / `whitelistMint` 호출 시 Deploy 패널 **Value** = `0.001`, 단위 **ether**.
+
+#### Account 바꾸기
+
+Deploy & Run 상단 **Account** → #1, #2로 전환해 권한·whitelist 테스트.
+
+---
+
+## 3. 왼쪽 아이콘 요약
+
+| 순서 | 아이콘 | 이름 | Stage 0~3에서 |
 | --- | --- | --- | --- |
-| **파란색** | Read | 버튼만 클릭 (call) | 값 **조회** (상태 안 바꿈) |
-| **주황색** | Write | 값 입력 → **transact** | 상태 **변경** (가스 사용) |
-
-#### VALUE(이더 보내는 칸) — mint할 때
-
-주황색 `mint` / `whitelistMint`처럼 **ETH가 필요한** 함수:
-
-1. 함수 **위쪽** 또는 Deploy 패널의 **Value** 칸에 `0.001`  
-2. 단위를 **ether**로 선택 (wei 아님!)  
-3. 그다음 `mint` → **transact**
-
-Value를 0으로 두면 `Insufficient payment`로 **revert**됩니다.
-
-### Step F — Account 바꾸기 (권한 테스트)
-
-Deploy & Run 상단 **Account** 드롭다운:
-
-| Account | 용도 |
-| --- | --- |
-| #0 | 보통 **owner** (배포자) |
-| #1, #2 | 다른 사람 — `onlyOwner` / whitelist 테스트 |
-
-owner만 되는 함수를 #1에서 호출하면 **revert**가 정상입니다.
-
-### Step G — 하단 콘솔 읽기
-
-| 표시 | 의미 |
-| --- | --- |
-| 초록 / `status 0x1` | 성공 |
-| 빨간 에러 / revert | 조건 실패 (`require`에 걸림) — **의도한 실패도 테스트** |
+| ① | 📁 | **File Explorer** | `.sol` 붙여넣기 |
+| ② | ⚙️ | **Solidity Compiler** | 0.8.31 · osaka · Compile |
+| ③ | 🚀 | **Deploy & Run** | Remix VM · Deploy |
+| ④ | (③ 하단) | **Deployed Contracts** | Read / Write |
 
 ---
 
-## 3. Stage별 — 꼭 확인해야 할 내용
+## 4. Stage별 — 꼭 확인해야 할 내용
 
 ### 한눈에 보기
 
@@ -199,7 +240,7 @@ owner만 되는 함수를 #1에서 호출하면 **revert**가 정상입니다.
 
 ---
 
-## 4. 자주 하는 실수 (전 Stage 공통)
+## 5. 자주 하는 실수 (전 Stage 공통)
 
 | 실수 | 해결 |
 | --- | --- |
@@ -212,7 +253,7 @@ owner만 되는 함수를 #1에서 호출하면 **revert**가 정상입니다.
 
 ---
 
-## 5. 학습 흐름 요약
+## 6. 학습 흐름 요약
 
 ```text
 Cursor (Stage 프롬프트)

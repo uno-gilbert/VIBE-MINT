@@ -16,6 +16,12 @@ body {
   padding: 2rem 1rem;
 }
 
+@media (min-width: 900px) {
+  #root {
+    max-width: 920px;
+  }
+}
+
 .card {
   background: #fff;
   border-radius: 16px;
@@ -92,6 +98,32 @@ button.outline {
   color: #16a34a;
 }
 
+.mint-success {
+  line-height: 1.6;
+}
+
+.tx-link {
+  text-decoration: none;
+}
+
+.tx-link:hover .tx-hash {
+  text-decoration: underline;
+}
+
+.tx-hash {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8rem;
+  word-break: break-all;
+  color: #2563eb;
+}
+
+.tx-hash-em {
+  font-weight: 700;
+  color: #1d4ed8;
+}
+
 a {
   color: #2563eb;
 }
@@ -104,4 +136,110 @@ a {
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
   margin-left: 0.5rem;
+}
+
+.hero-section {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.hero-section h2 {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.hero-card {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 720px) {
+  .hero-card {
+    grid-template-columns: minmax(200px, 280px) 1fr;
+    align-items: start;
+  }
+}
+
+.hero-card__canvas {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  background: #f3f4f6;
+}
+
+.hero-card__meta {
+  font-size: 0.9rem;
+}
+
+.hero-card__meta strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.hero-card__traits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.hero-card__traits li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: #f8f9fc;
+  border-radius: 8px;
+}
+
+.hero-card__traits span {
+  color: #6b7280;
+}
+
+.hero-card__note {
+  margin: 0.75rem 0 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.hero-card__hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.hero-lookup {
+  margin-top: 1.25rem;
+}
+
+.hero-lookup label {
+  display: block;
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 0.35rem;
+}
+
+.hero-lookup__row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hero-lookup__row input {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  font-size: 1rem;
+}
+
+.hero-lookup__row button {
+  width: auto;
+  margin-top: 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }

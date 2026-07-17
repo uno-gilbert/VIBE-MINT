@@ -20,4 +20,4 @@ Chrome + MetaMask (Sepolia)에서 http://localhost:5173
 
 ## 정답 예시
 
-`../solution/` — supply 표시, whitelist mint, OpenSea 링크 포함
+`../solution/` — supply 표시, whitelist mint, Etherscan NFT 링크 포함
