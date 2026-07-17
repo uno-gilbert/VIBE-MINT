@@ -56,88 +56,45 @@ def draw_badge(draw, x, y, num, font):
     draw.text((x - tw / 2, y - th / 2 - 2), text, fill=WHITE, font=font)
 
 
-def wrap_text(text, font, max_width, draw):
-    words = text.replace(" · ", " · ").split(" ")
-    lines = []
-    current = ""
-    for word in words:
-        test = f"{current} {word}".strip()
-        bbox = draw.textbbox((0, 0), test, font=font)
-        if bbox[2] - bbox[0] <= max_width:
-            current = test
-        else:
-            if current:
-                lines.append(current)
-            current = word
-    if current:
-        lines.append(current)
-    return lines
+def cover_crop_image(source: Image.Image, target_w: int, target_h: int) -> Image.Image:
+    src = source.convert("RGB")
+    src_ratio = src.width / src.height
+    target_ratio = target_w / target_h
+    if src_ratio > target_ratio:
+        new_h = target_h
+        new_w = int(new_h * src_ratio)
+    else:
+        new_w = target_w
+        new_h = int(new_w / src_ratio)
+    resized = src.resize((new_w, new_h), Image.Resampling.LANCZOS)
+    left = (new_w - target_w) // 2
+    top = (new_h - target_h) // 2
+    return resized.crop((left, top, left + target_w, top + target_h))
 
 
-def draw_timeline_node(draw, x, y, color, label, title, body_lines, icon_fn, fonts):
+def paste_site_tile(img, draw, photo_path, box, period, title, lines, fonts):
     title_f, body_f, tag_f = fonts
-    r = 18
-    draw.line((x, y + r, x, y + 52), fill=BORDER, width=3)
-    draw.ellipse((x - r, y - r, x + r, y + r), fill=color, outline=WHITE, width=3)
-    icon_fn(draw, x, y, r)
-    draw.text((x + 36, y - 22), label, fill=BLUE, font=tag_f)
-    draw.text((x + 36, y - 2), title, fill=NAVY, font=title_f)
-    by = y + 18
-    for line in body_lines:
-        draw.text((x + 36, by), line, fill=DARK, font=body_f)
-        by += 22
-
-
-def icon_blizzard(draw, x, y, r):
-    draw.rectangle((x - 10, y - 8, x + 10, y + 8), fill=WHITE)
-    draw.text((x - 7, y - 10), "BZ", fill=(200, 50, 50), font=load_font(12, bold=True))
-
-
-def icon_mobile(draw, x, y, r):
-    draw.rounded_rectangle((x - 8, y - 12, x + 8, y + 12), radius=3, fill=WHITE)
-    draw.ellipse((x - 2, y + 8, x + 2, y + 11), fill=GRAY)
-
-
-def icon_chain(draw, x, y, r):
-    draw.ellipse((x - 12, y - 4, x - 2, y + 6), outline=WHITE, width=2)
-    draw.ellipse((x + 2, y - 4, x + 12, y + 6), outline=WHITE, width=2)
-
-
-def icon_poker(draw, x, y, r):
-    draw.ellipse((x - 10, y - 10, x + 10, y + 10), fill=WHITE, outline=(220, 38, 38), width=2)
-    draw.text((x - 8, y - 9), "♠", fill=(220, 38, 38), font=load_font(14))
-
-
-def icon_ai(draw, x, y, r):
-    draw.polygon([(x, y - 12), (x + 12, y + 10), (x - 12, y + 10)], fill=WHITE)
-    draw.text((x - 5, y - 4), "AI", fill=BLUE, font=load_font(11, bold=True))
-
-
-def draw_instructor_avatar(draw, cx, cy):
-    """Simple instructor illustration — waving developer."""
-    # shoulders
-    draw.ellipse((cx - 70, cy + 20, cx + 70, cy + 110), fill=LIGHT_BLUE, outline=BLUE, width=2)
-    # head
-    draw.ellipse((cx - 48, cy - 70, cx + 48, cy + 26), fill=(255, 224, 189), outline=(180, 140, 110), width=2)
-    # hair
-    draw.arc((cx - 50, cy - 82, cx + 50, cy + 10), start=180, end=360, fill=(30, 30, 30), width=16)
-    # eyes
-    draw.ellipse((cx - 18, cy - 20, cx - 8, cy - 10), fill=DARK)
-    draw.ellipse((cx + 8, cy - 20, cx + 18, cy - 10), fill=DARK)
-    # smile
-    draw.arc((cx - 16, cy - 8, cx + 16, cy + 14), start=10, end=170, fill=(180, 80, 80), width=2)
-    # waving hand
-    draw.line((cx + 52, cy + 30, cx + 95, cy - 10), fill=(255, 224, 189), width=10)
-    draw.ellipse((cx + 88, cy - 22, cx + 108, cy - 2), fill=(255, 224, 189), outline=(180, 140, 110), width=2)
-    # laptop badge
-    draw.rounded_rectangle((cx - 34, cy + 48, cx + 34, cy + 78), radius=4, fill=NAVY)
-    draw.text((cx - 24, cy + 52), "VibeMint", fill=WHITE, font=load_font(14, bold=True))
+    x0, y0, x1, y1 = box
+    thumb_h = 140
+    rounded_rect(draw, box, 12, WHITE, BORDER, 2)
+    if photo_path.exists():
+        shot = cover_crop_image(Image.open(photo_path), x1 - x0 - 4, thumb_h)
+        img.paste(shot, (x0 + 2, y0 + 2))
+        draw.rectangle((x0 + 2, y0 + 2, x1 - 2, y0 + 2 + thumb_h), outline=BORDER, width=1)
+    text_y = y0 + thumb_h + 10
+    draw.text((x0 + 10, text_y), period, fill=BLUE, font=tag_f)
+    draw.text((x0 + 10, text_y + 18), title, fill=NAVY, font=title_f)
+    line_y = text_y + 42
+    for line in lines:
+        draw.text((x0 + 10, line_y), line, fill=DARK, font=body_f)
+        line_y += 18
 
 
 def generate_session1_1_1_instructor_env():
-    """강사 소개 · GitHub QR (Q&A·로드맵 제거)."""
+    """강사 소개 · GitHub QR — 경력별 공식 사이트 캡처."""
     out = IMAGES / "session1-1-1-instructor-env.png"
     qr_path = ROOT.parent / "images" / "vibe-mint-github-qr.png"
+    logos = IMAGES / "career-logos"
     if not qr_path.exists():
         raise FileNotFoundError(f"Missing QR: {qr_path}")
 
@@ -147,64 +104,54 @@ def generate_session1_1_1_instructor_env():
     title_f = load_font(52, bold=True)
     sub_f = load_font(26)
     card_title_f = load_font(28, bold=True)
-    body_f = load_font(20)
+    body_f = load_font(16)
     small_f = load_font(18)
-    tag_f = load_font(16, bold=True)
+    tag_f = load_font(14, bold=True)
+    node_title_f = load_font(17, bold=True)
     footer_f = load_font(26, bold=True)
 
-    # Header
     draw.text((80, 48), "VibeMint 워크숍 · 1차시-1", fill=GRAY, font=sub_f)
     draw.text((80, 92), "강사 소개 · 수업 환경", fill=NAVY, font=title_f)
     draw.text((80, 168), "강사 경력 · GitHub 실습 저장소", fill=GRAY, font=sub_f)
 
-    # --- Left card: Instructor ---
     left = (80, 230, 920, 960)
     rounded_rect(draw, left, 20, CARD_BG, BORDER, 2)
     draw.text((left[0] + 36, left[1] + 28), "1. 강사 소개", fill=NAVY, font=card_title_f)
+    draw.text((left[0] + 36, left[1] + 68), "경력 하이라이트 (공식 사이트)", fill=GRAY, font=small_f)
 
-    # Avatar illustration area
-    avatar_cx = left[0] + 130
-    avatar_cy = left[1] + 120
-    draw.rounded_rectangle(
-        (left[0] + 36, left[1] + 72, left[0] + 280, left[1] + 290),
-        radius=14,
-        fill=WHITE,
-        outline=LIGHT_BLUE,
-        width=2,
-    )
-    draw_instructor_avatar(draw, avatar_cx, avatar_cy)
-    draw.text((left[0] + 48, left[1] + 248), "안녕하세요!", fill=NAVY, font=body_f)
-    draw.text((left[0] + 48, left[1] + 274), "VibeMint 워크숍 강사", fill=GRAY, font=small_f)
-
-    # Career timeline
-    timeline_x = left[0] + 310
-    timeline_top = left[1] + 78
-    draw.text((timeline_x, timeline_top), "경력 타임라인", fill=BLUE, font=tag_f)
-
-    nodes = [
-        ("2000s", "Blizzard · Battle.net", ["디아블로 옥션 하우스 개발", "게임 아이템 경제의 중요성"], (200, 50, 50), icon_blizzard),
-        ("2010s", "Smilegate", ["모바일 게임 플랫폼 개발", "대규모 유저 서비스 경험"], (16, 120, 70), icon_mobile),
-        ("Blockchain", "Anserslab", ["블록체인 프로젝트 진행", "온체인·오프체인 연동"], (124, 58, 237), icon_chain),
-        ("Poker", "온라인 포커 서비스", ["포커칩 충전 → 크립토 에셋", "다수 블록체인 프로젝트 총괄"], (180, 120, 40), icon_poker),
-        ("Now", "HelloLive · 개발 이사", ["AI 활용 프로젝트 진행", "Intent → Ship 실무 적용"], BLUE, icon_ai),
+    careers = [
+        (logos / "01-blizzard-site.png", "2000s", "Blizzard · Battle.net", ["디아블로 옥션 하우스", "게임 아이템 경제"]),
+        (logos / "02-smilegate-site.png", "2010s", "Smilegate", ["모바일 게임 플랫폼", "대규모 유저 서비스"]),
+        (logos / "03-nsuslab-site.png", "Blockchain", "NSUSLAB · Anserslab", ["블록체인 프로젝트", "iGaming 개발"]),
+        (logos / "04-poker-site.png", "Poker", "GGPoker · WSOP", ["포커칩 → 크립토 충전", "블록체인 PM 총괄"]),
+        (logos / "05-hellolive-site.png", "Now", "HelloLive · 개발 이사", ["AI 활용 프로젝트", "Intent → Ship"]),
     ]
 
-    ny = timeline_top + 34
-    for label, title, lines, color, icon in nodes:
-        draw_timeline_node(
-            draw,
-            timeline_x + 14,
-            ny,
-            color,
-            label,
-            title,
-            lines,
-            icon,
-            (load_font(19, bold=True), load_font(17), tag_f),
-        )
-        ny += 108
+    tile_w = 246
+    tile_h = 230
+    gap = 14
+    start_x = left[0] + 36
+    start_y = left[1] + 108
+    fonts = (node_title_f, body_f, tag_f)
 
-    # --- Right card: GitHub + QR ---
+    # 1행: Blizzard · Smilegate · NSUSLAB
+    for col, idx in enumerate([0, 1, 2]):
+        photo, period, title, lines = careers[idx]
+        x = start_x + col * (tile_w + gap)
+        y = start_y
+        paste_site_tile(img, draw, photo, (x, y, x + tile_w, y + tile_h), period, title, lines, fonts)
+
+    # 2행: Poker · HelloLive (가운데 정렬)
+    row2_y = start_y + tile_h + gap
+    row2_width = 2 * tile_w + gap
+    row2_x = start_x + (3 * (tile_w + gap) - row2_width) // 2
+    for col, idx in enumerate([3, 4]):
+        photo, period, title, lines = careers[idx]
+        x = row2_x + col * (tile_w + gap)
+        paste_site_tile(
+            img, draw, photo, (x, row2_y, x + tile_w, row2_y + tile_h), period, title, lines, fonts
+        )
+
     right = (980, 230, 1840, 960)
     rounded_rect(draw, right, 20, CARD_BG, BORDER, 2)
     draw.text((right[0] + 36, right[1] + 28), "2. 실습 저장소 · GitHub", fill=NAVY, font=card_title_f)
