@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #31 — Mad Hatter",
   "description": "VibeMint Sepolia test NFT. Hero card: Mad Hatter.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/31.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/31.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

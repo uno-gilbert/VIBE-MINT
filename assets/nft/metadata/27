@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #27 — Jieting Failure",
   "description": "VibeMint Sepolia test NFT. Hero card: Jieting Failure.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/27.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/27.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

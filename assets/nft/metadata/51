@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #51 — Will O Wisp",
   "description": "VibeMint Sepolia test NFT. Hero card: Will O Wisp.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/51.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/51.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

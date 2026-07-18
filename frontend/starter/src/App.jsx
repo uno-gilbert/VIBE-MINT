@@ -51,6 +51,7 @@ function App() {
       abi: vibeMintAbi,
       functionName: "mint",
       value: parseEther("0.001"),
+      gas: 250_000n,
     });
   };
 

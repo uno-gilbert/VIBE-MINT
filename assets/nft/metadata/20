@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #20 — Fortress Defender",
   "description": "VibeMint Sepolia test NFT. Hero card: Fortress Defender.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/20.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/20.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

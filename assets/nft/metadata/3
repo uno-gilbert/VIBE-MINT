@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #3 — Bat Monkey",
   "description": "VibeMint Sepolia test NFT. Hero card: Bat Monkey.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/3.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/3.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

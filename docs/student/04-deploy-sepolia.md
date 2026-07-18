@@ -38,10 +38,50 @@ Faucet (택 1):
 
 ## 3. 배포 후 설정 (owner)
 
-Deployed Contracts 패널에서:
+Deployed Contracts 패널에서 **배포한 지갑(owner)** 으로:
 
-1. `setBaseURI` — 예: `https://example.com/metadata/` (교육용 placeholder)
-2. (선택) `setWhitelist` — 본인 주소 추가
+### `setBaseURI` (권장 — Etherscan NFT 이미지)
+
+1. 주황색 **`setBaseURI`** 클릭
+2. 아래 URL 중 **하나** 입력 — **끝 `/` 필수** (없으면 `metadata1`처럼 깨짐):
+
+```text
+https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/metadata/
+```
+
+GitHub **Raw** 버튼을 누르면 `refs/heads/main` 형태로 보일 수 있습니다. **같은 주소**이며, 역시 **끝 `/`** 를 붙이세요:
+
+```text
+https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/refs/heads/main/assets/nft/metadata/
+```
+
+| baseURI 끝 | + tokenId `1` | 결과 |
+| --- | --- | --- |
+| `…/metadata/` ✅ | `1` | `…/metadata/1` → JSON OK |
+| `…/metadata` ❌ | `1` | `…/metadata1` → **404** |
+
+3. **transact** → MetaMask Confirm
+
+| tokenId | `tokenURI` 결과 (예) |
+| --- | --- |
+| `0` | `…/metadata/0` → Hero **Alchemist** |
+| `1` | `…/metadata/1` → Hero **Archmage** |
+
+> **mint 전에** 호출해 두는 것을 권장합니다.  
+> `owner`가 아닌 지갑으로 호출하면 revert.
+
+**확인**: Read **`tokenURI`** → `0` 입력 → 위 URL + `0` 이 나오면 OK.
+
+에셋 상세: [assets/nft/README.md](../../assets/nft/README.md)
+
+### (선택) `setWhitelist`
+
+본인 주소를 whitelist에 추가:
+
+```text
+accounts: ["0x내주소"]
+allowed: true
+```
 
 ---
 
@@ -101,6 +141,17 @@ https://sepolia.etherscan.io/address/YOUR_CONTRACT_ADDRESS
 - Contract creation tx
 - Internal tx / mint tx
 
+**NFT 이미지** (tokenId `0` = 첫 mint):
+
+```text
+https://sepolia.etherscan.io/nft/YOUR_CONTRACT_ADDRESS/0
+```
+
+`setBaseURI` 후 **수 분** 지나면 Hero 카드 이미지가 표시될 수 있습니다. 안 보이면 §3 `tokenURI` Read부터 확인.
+
+> metadata `image`는 **JPEG** (`.jpg`) — Etherscan·MetaMask 호환. WebP만 쓰면 이미지가 안 보일 수 있습니다.  
+> repo의 metadata·`images/*.jpg`를 GitHub **main에 push**한 뒤, Etherscan NFT 페이지에서 **Refresh NFT Metadata**(로그인) 또는 재시도.
+
 **(선택) Verify**: Remix Plugin "Etherscan Verification" 또는 수동 verify.
 
 ---
@@ -108,8 +159,10 @@ https://sepolia.etherscan.io/address/YOUR_CONTRACT_ADDRESS
 ## 체크리스트
 
 - [ ] Sepolia에 컨트랙트 배포됨
+- [ ] `setBaseURI` — GitHub metadata URL 설정
 - [ ] mint 1회 성공
 - [ ] Contract address 저장 (.env 준비)
+- [ ] (선택) Etherscan NFT 페이지에서 이미지 확인
 
 ---
 

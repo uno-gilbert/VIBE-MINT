@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #15 — Cold Eyed Advisor",
   "description": "VibeMint Sepolia test NFT. Hero card: Cold Eyed Advisor.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/15.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/15.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

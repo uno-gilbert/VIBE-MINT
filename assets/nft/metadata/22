@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #22 — Golden Cavalry",
   "description": "VibeMint Sepolia test NFT. Hero card: Golden Cavalry.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/22.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/22.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #24 — Hanzhong Schemer",
   "description": "VibeMint Sepolia test NFT. Hero card: Hanzhong Schemer.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/24.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/24.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

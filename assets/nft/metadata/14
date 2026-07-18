@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #14 — Cat Trickster",
   "description": "VibeMint Sepolia test NFT. Hero card: Cat Trickster.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/14.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/14.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

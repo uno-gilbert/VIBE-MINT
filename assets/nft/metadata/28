@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #28 — Joker",
   "description": "VibeMint Sepolia test NFT. Hero card: Joker.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/28.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/28.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

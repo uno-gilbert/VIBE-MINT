@@ -90,6 +90,9 @@ Deploy 탭 Environment: **Remix VM**
 - `.env`의 `VITE_CONTRACT_ADDRESS`가 Sepolia 배포 주소와 일치하는지
 - MetaMask Sepolia + 충분한 ETH (0.001+ gas)
 - `publicMintEnabled`가 true인지 (Remix Read Contract)
+- **`gas limit too high` (Infura)**: 컨트랙트 revert가 아니라 **RPC 거절**인 경우가 많음 → MetaMask **Sepolia RPC**를 `https://ethereum-sepolia.publicnode.com` 등으로 변경 후 재시도. Remix `mint`가 되면 DApp·RPC 문제
+- **Chain ID를 못 가져옴**: `https://rpc.sepolia.org` 가 **404**인 경우 있음 → `https://1rpc.io/sepolia` 또는 `https://sepolia.drpc.org`, Chain ID **11155111** 수동 입력
+- `mintedCount(내주소)`가 **3**이면 지갑당 한도 초과
 
 ### NFT가 안 보일 때 (MetaMask · Etherscan)
 

@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #37 — Quiet Counselor",
   "description": "VibeMint Sepolia test NFT. Hero card: Quiet Counselor.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/37.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/37.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

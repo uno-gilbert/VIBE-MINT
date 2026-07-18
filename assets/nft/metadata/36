@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #36 — Orthodox Commander",
   "description": "VibeMint Sepolia test NFT. Hero card: Orthodox Commander.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/36.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/36.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

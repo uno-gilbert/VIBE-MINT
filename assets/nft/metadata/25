@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #25 — Heir Of North",
   "description": "VibeMint Sepolia test NFT. Hero card: Heir Of North.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/25.webp",
+  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/25.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

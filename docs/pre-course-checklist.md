@@ -34,9 +34,19 @@
 3. **시드 구문(Seed Phrase)은 절대 타인·AI 채팅·SNS에 노출하지 마세요.** 개인 메모장 등 안전한 곳에만 보관하세요.
 4. MetaMask에 **Sepolia 테스트넷**을 추가합니다.
    - 네트워크 이름: `Sepolia`
-   - RPC URL: `https://rpc.sepolia.org`
+   - RPC URL: `https://ethereum-sepolia.publicnode.com` (아래 대안 참고)
    - Chain ID: `11155111`
    - 통화 기호: `ETH`
+
+   > `https://rpc.sepolia.org` 는 **2026년 기준 동작하지 않을 수 있음** (404). Chain ID를 못 가져오면 RPC를 바꾸세요.
+
+   **Sepolia RPC 대안** (택 1):
+
+   | RPC URL |
+   | --- |
+   | `https://ethereum-sepolia.publicnode.com` |
+   | `https://1rpc.io/sepolia` |
+   | `https://sepolia.drpc.org` |
 
 ### 2. Cursor AI 편집기
 

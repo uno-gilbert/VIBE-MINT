@@ -13,7 +13,7 @@ function nftImagesPlugin() {
     configureServer(server) {
       server.middlewares.use("/nft-images", (req, res, next) => {
         const name = path.basename(req.url ?? "");
-        if (!/^\d+\.webp$/.test(name)) {
+        if (!/^\d+\.(webp|png|jpg|jpeg)$/.test(name)) {
           next();
           return;
         }
@@ -23,7 +23,14 @@ function nftImagesPlugin() {
           res.end("Not found");
           return;
         }
-        res.setHeader("Content-Type", "image/webp");
+        const ext = path.extname(name).toLowerCase();
+        const types = {
+          ".webp": "image/webp",
+          ".png": "image/png",
+          ".jpg": "image/jpeg",
+          ".jpeg": "image/jpeg",
+        };
+        res.setHeader("Content-Type", types[ext] ?? "application/octet-stream");
         fs.createReadStream(filePath).pipe(res);
       });
     },

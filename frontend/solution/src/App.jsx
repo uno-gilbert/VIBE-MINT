@@ -93,6 +93,7 @@ function App() {
       abi: vibeMintAbi,
       functionName: fn,
       value: priceWei,
+      gas: 250_000n,
     });
   };
 
