@@ -49,7 +49,7 @@
 2. 네트워크 목록에서 **Sepolia** 선택  
    목록에 없으면 직접 추가:
    - 네트워크 이름: `Sepolia`
-   - RPC URL: `https://rpc.sepolia.org`
+   - RPC URL: `https://ethereum-sepolia.publicnode.com`
    - Chain ID: `11155111`
    - 통화 기호: `ETH`
 3. 상단에 **Sepolia**가 표시되는지 확인
