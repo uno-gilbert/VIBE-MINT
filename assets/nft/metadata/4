@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #4 — Bell Raider",
   "description": "VibeMint Sepolia test NFT. Hero card: Bell Raider.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/4.jpg",
+  "image": "https://magenta-key-quokka-912.mypinata.cloud/ipfs/bafybeibzqlnvhkviwqytx2lx7pxk65yzjap3uunoeth2wknylzg6z4pm7e/4.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

@@ -398,10 +398,17 @@ Part 0에서 이미 받았다면 잔액만 확인하세요.
 #### A. `setBaseURI` (권장)
 
 1. 주황색 `setBaseURI`
-2. 입력: `https://example.com/metadata/`
+2. 입력 — **택 1** (끝 `/` 필수):
+
+| 방식 | URL | 문서 |
+| --- | --- | --- |
+| **GitHub Raw** (빠름) | `https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/metadata/` | [04-deploy-sepolia.md](04-deploy-sepolia.md) |
+| **Pinata IPFS** (실무에 가까움) | Dedicated Gateway + Metadata CID | [06-ipfs-metadata.md](06-ipfs-metadata.md) |
+
 3. **transact** → MetaMask Confirm
 
-교육용 URL이어도 mint·배포 실습에는 문제 없습니다.
+교육용 placeholder(`https://example.com/metadata/`)여도 mint·배포 실습에는 문제 없습니다.  
+Hero 카드 이미지를 보려면 위 GitHub 또는 IPFS URL을 쓰세요.
 
 #### B. `setWhitelist` (선택)
 
@@ -656,6 +663,7 @@ https://sepolia.etherscan.io/nft/{CONTRACT_ADDRESS}/0
 | Stage 빌드 상세 | [03-incremental-build.md](03-incremental-build.md) |
 | Remix·Stage 확인 | [../prompts/03-stage-build/README.md](../prompts/03-stage-build/README.md) |
 | 배포 상세 | [04-deploy-sepolia.md](04-deploy-sepolia.md) |
+| IPFS 메타데이터 (선택) | [06-ipfs-metadata.md](06-ipfs-metadata.md) |
 | 프론트 상세 | [05-frontend-mint.md](05-frontend-mint.md) |
 | OpenSea Studio (메인넷 발행) | [05-frontend-mint.md §9](05-frontend-mint.md#9-수업-후--opensea-studio로-nft-발행-선택) · [opensea.io/studio](https://opensea.io/studio) |
 | 보안 Audit 프롬프트 | [../prompts/04-security-audit.md](../prompts/04-security-audit.md) |

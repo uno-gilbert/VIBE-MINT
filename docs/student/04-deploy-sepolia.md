@@ -74,6 +74,14 @@ https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/refs/heads/main/assets/n
 
 에셋 상세: [assets/nft/README.md](../../assets/nft/README.md)
 
+### (선택) Pinata IPFS로 `setBaseURI`
+
+GitHub Raw 대신 **[Pinata Cloud](https://app.pinata.cloud/)** 에 메타데이터를 올리는 클릭 따라하기:
+
+→ [06-ipfs-metadata.md](06-ipfs-metadata.md) (서비스 고정: Pinata · Dedicated Gateway)
+
+메인넷·영구 보관에 더 가깝습니다. 수업 당일 시간이 없으면 GitHub Raw로 두고, 나중에 이 문서로 전환해도 됩니다 (`setBaseURI`만 다시 호출).
+
 ### (선택) `setWhitelist`
 
 본인 주소를 whitelist에 추가:
@@ -159,7 +167,7 @@ https://sepolia.etherscan.io/nft/YOUR_CONTRACT_ADDRESS/0
 ## 체크리스트
 
 - [ ] Sepolia에 컨트랙트 배포됨
-- [ ] `setBaseURI` — GitHub metadata URL 설정
+- [ ] `setBaseURI` — GitHub metadata URL 설정 (또는 [IPFS](06-ipfs-metadata.md))
 - [ ] mint 1회 성공
 - [ ] Contract address 저장 (.env 준비)
 - [ ] (선택) Etherscan NFT 페이지에서 이미지 확인
@@ -168,4 +176,5 @@ https://sepolia.etherscan.io/nft/YOUR_CONTRACT_ADDRESS/0
 
 ## 다음
 
-→ [05-frontend-mint.md](05-frontend-mint.md)
+→ [05-frontend-mint.md](05-frontend-mint.md)  
+→ (선택) [06-ipfs-metadata.md](06-ipfs-metadata.md) — IPFS로 메타데이터 관리

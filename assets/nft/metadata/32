@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #32 — Mind Witch",
   "description": "VibeMint Sepolia test NFT. Hero card: Mind Witch.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/32.jpg",
+  "image": "https://magenta-key-quokka-912.mypinata.cloud/ipfs/bafybeibzqlnvhkviwqytx2lx7pxk65yzjap3uunoeth2wknylzg6z4pm7e/32.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

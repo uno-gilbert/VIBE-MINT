@@ -104,6 +104,28 @@ Deploy 탭 Environment: **Remix VM**
 
 ---
 
+## IPFS 메타데이터
+
+따라하기: [06-ipfs-metadata.md](../student/06-ipfs-metadata.md)
+
+### `tokenURI`는 되는데 이미지가 안 보임
+
+- metadata JSON의 `image`가 아직 **GitHub Raw**이거나 **잘못된 Images CID**
+- metadata를 고친 뒤 **폴더를 다시 업로드**했는지 (CID가 바뀜 → `setBaseURI`도 새 Metadata CID)
+- gateway: `https://gateway.pinata.cloud/ipfs/{IMAGES_CID}/{id}.jpg` 직접 열어 보기
+
+### `setBaseURI` 후 404 / 깨진 경로
+
+- baseURI 끝 **`/`** 누락 → `…/CID/` 로 재설정
+- 폴더 업로드 시 `metadata/metadata/0` 처럼 **한 겹 더** 넣지 않았는지 확인
+
+### Pinata에서 파일이 안 열림
+
+- Free 플랜 pin 한도·상태 확인 후 재업로드
+- `ipfs.io` gateway로 동일 CID 재시도
+
+---
+
 ## 시간 관리
 
 | 지연 원인 | 대응 |
@@ -111,3 +133,4 @@ Deploy 탭 Environment: **Remix VM**
 | Stage 2까지 밀림 | Stage 3 whitelist 생략, solution diff 참고 |
 | Faucet 지연 | 강사 일괄 전송 |
 | 프론트 밀림 | starter 대신 solution 실행, 코드 walkthrough만 |
+| IPFS 업로드 지연 | GitHub Raw `setBaseURI`로 진행, IPFS는 숙제/선택 |

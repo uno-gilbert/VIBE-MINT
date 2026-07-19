@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #7 — Bonus Gold 3",
   "description": "VibeMint Sepolia test NFT. Hero card: Bonus Gold 3.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/7.jpg",
+  "image": "https://magenta-key-quokka-912.mypinata.cloud/ipfs/bafybeibzqlnvhkviwqytx2lx7pxk65yzjap3uunoeth2wknylzg6z4pm7e/7.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

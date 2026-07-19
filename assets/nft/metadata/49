@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #49 — White Dragon",
   "description": "VibeMint Sepolia test NFT. Hero card: White Dragon.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/49.jpg",
+  "image": "https://magenta-key-quokka-912.mypinata.cloud/ipfs/bafybeibzqlnvhkviwqytx2lx7pxk65yzjap3uunoeth2wknylzg6z4pm7e/49.jpg",
   "attributes": [
     {
       "trait_type": "Hero",

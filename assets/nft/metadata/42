@@ -1,7 +1,7 @@
 {
   "name": "VibeMint Hero #42 — Stone Golem",
   "description": "VibeMint Sepolia test NFT. Hero card: Stone Golem.",
-  "image": "https://raw.githubusercontent.com/uno-gilbert/VIBE-MINT/main/assets/nft/images/42.jpg",
+  "image": "https://magenta-key-quokka-912.mypinata.cloud/ipfs/bafybeibzqlnvhkviwqytx2lx7pxk65yzjap3uunoeth2wknylzg6z4pm7e/42.jpg",
   "attributes": [
     {
       "trait_type": "Hero",
